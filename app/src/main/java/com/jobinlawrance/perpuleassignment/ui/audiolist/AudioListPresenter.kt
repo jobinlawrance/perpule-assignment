@@ -20,7 +20,7 @@ class AudioListPresenter @Inject constructor(val audioListRepo: AudioListContrac
             .subscribeOn(Schedulers.io())
             .subscribe(
                 {
-                    viewStateSubject.onNext(AudioListViewState.Success(it.data))
+                    viewStateSubject.onNext(AudioListViewState.Success(it))
                     viewStateSubject.onComplete()
                 },
                 {

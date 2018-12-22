@@ -9,6 +9,6 @@ import javax.inject.Inject
 
 class AudioListNetworkRepo @Inject constructor(private val audioListApi: AudioListApi) : AudioListContract.Repository {
 
-    override fun getAudioList(): Observable<ApiResponse<List<AudioData>>> = audioListApi.getAudioList()
+    override fun getAudioList(): Observable<List<AudioData>> = audioListApi.getAudioList().map { it.data }
 
 }

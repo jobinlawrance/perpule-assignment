@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 interface AudioListContract {
     interface Repository {
-        fun getAudioList(): Observable<ApiResponse<List<AudioData>>>
+        fun getAudioList(): Observable<List<AudioData>>
     }
 
     interface Presenter {
