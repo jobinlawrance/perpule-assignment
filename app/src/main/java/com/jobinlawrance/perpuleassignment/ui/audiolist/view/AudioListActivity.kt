@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jobinlawrance.perpuleassignment.R
 import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
@@ -33,6 +35,8 @@ class AudioListActivity : AppCompatActivity(), AudioListContract.View {
 
     private fun initialize() {
         audioListAdapter = AudioListAdapter(this::onAudioItemClickListener)
+        recycler_view.adapter = audioListAdapter
+        recycler_view.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
     @SuppressLint("CheckResult")
