@@ -1,6 +1,6 @@
-package com.jobinlawrance.perpuleassignment.audiolist.data.repository
+package com.jobinlawrance.perpuleassignment.ui.audiolist.data.repository
 
-import com.jobinlawrance.perpuleassignment.audiolist.AudioListContract
+import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import javax.inject.Inject
 
 class AudioListRepo @Inject constructor(private val audioListNetworkRepo: AudioListNetworkRepo):

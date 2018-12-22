@@ -16,7 +16,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".audiolist.view.AudioListActivity">
+        <activity android:name="com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

@@ -1,4 +1,4 @@
-package com.jobinlawrance.perpuleassignment.audiolist.view
+package com.jobinlawrance.perpuleassignment.ui.audiolist.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.jobinlawrance.perpuleassignment.R
-import com.jobinlawrance.perpuleassignment.audiolist.AudioListContract
+import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.lifecycle.autoDisposable

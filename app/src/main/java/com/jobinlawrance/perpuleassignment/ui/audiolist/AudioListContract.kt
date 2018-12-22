@@ -1,8 +1,8 @@
-package com.jobinlawrance.perpuleassignment.audiolist
+package com.jobinlawrance.perpuleassignment.ui.audiolist
 
 import com.jobinlawrance.perpuleassignment.ApiResponse
-import com.jobinlawrance.perpuleassignment.audiolist.entities.AudioData
-import com.jobinlawrance.perpuleassignment.audiolist.view.AudioListViewState
+import com.jobinlawrance.perpuleassignment.ui.audiolist.entities.AudioData
+import com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListViewState
 import io.reactivex.Observable
 
 interface AudioListContract {

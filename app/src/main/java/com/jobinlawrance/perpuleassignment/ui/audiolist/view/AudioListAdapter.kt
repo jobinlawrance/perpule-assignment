@@ -1,10 +1,10 @@
-package com.jobinlawrance.perpuleassignment.audiolist.view
+package com.jobinlawrance.perpuleassignment.ui.audiolist.view
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jobinlawrance.perpuleassignment.R
-import com.jobinlawrance.perpuleassignment.audiolist.entities.AudioData
+import com.jobinlawrance.perpuleassignment.ui.audiolist.entities.AudioData
 import com.jobinlawrance.perpuleassignment.extensions.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_audiolist.*

@@ -1,8 +1,8 @@
 package com.jobinlawrance.perpuleassignment.di
 
 import dagger.Module
-import com.jobinlawrance.perpuleassignment.audiolist.di.AudioListModule
-import com.jobinlawrance.perpuleassignment.audiolist.view.AudioListActivity
+import com.jobinlawrance.perpuleassignment.ui.audiolist.di.AudioListModule
+import com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListActivity
 import dagger.android.ContributesAndroidInjector
 
 

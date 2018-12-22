@@ -1,6 +1,6 @@
-package com.jobinlawrance.perpuleassignment.audiolist.view
+package com.jobinlawrance.perpuleassignment.ui.audiolist.view
 
-import com.jobinlawrance.perpuleassignment.audiolist.entities.AudioData
+import com.jobinlawrance.perpuleassignment.ui.audiolist.entities.AudioData
 
 sealed class AudioListViewState {
     object Loading: AudioListViewState()

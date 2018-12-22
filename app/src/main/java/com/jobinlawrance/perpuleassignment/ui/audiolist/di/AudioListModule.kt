@@ -1,9 +1,9 @@
-package com.jobinlawrance.perpuleassignment.audiolist.di
+package com.jobinlawrance.perpuleassignment.ui.audiolist.di
 
-import com.jobinlawrance.perpuleassignment.audiolist.AudioListContract
-import com.jobinlawrance.perpuleassignment.audiolist.AudioListPresenter
-import com.jobinlawrance.perpuleassignment.audiolist.data.AudioListApi
-import com.jobinlawrance.perpuleassignment.audiolist.data.repository.AudioListRepo
+import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
+import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListPresenter
+import com.jobinlawrance.perpuleassignment.ui.audiolist.data.AudioListApi
+import com.jobinlawrance.perpuleassignment.ui.audiolist.data.repository.AudioListRepo
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

@@ -1,7 +1,7 @@
-package com.jobinlawrance.perpuleassignment.audiolist
+package com.jobinlawrance.perpuleassignment.ui.audiolist
 
 import android.annotation.SuppressLint
-import com.jobinlawrance.perpuleassignment.audiolist.view.AudioListViewState
+import com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListViewState
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject

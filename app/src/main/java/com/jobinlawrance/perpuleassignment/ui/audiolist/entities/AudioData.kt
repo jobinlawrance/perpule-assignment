@@ -1,4 +1,4 @@
-package com.jobinlawrance.perpuleassignment.audiolist.entities
+package com.jobinlawrance.perpuleassignment.ui.audiolist.entities
 
 data class AudioData(
     val audio: String,
