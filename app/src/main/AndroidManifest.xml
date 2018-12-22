@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.jobinlawrance.perpuleassignment">
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -14,13 +15,18 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
-
         </activity>
-        <activity android:name="com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListActivity">
+        <activity android:name=".ui.audiolist.view.AudioListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <service android:name=".ui.audiodetail.ui.AudioService"/>
+
+        <activity android:name=".ui.audiodetail.ui.AudioDetailActivity">
         </activity>
     </application>
 

@@ -1,6 +1,7 @@
 package com.jobinlawrance.perpuleassignment.ui.audiolist.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jobinlawrance.perpuleassignment.R
 import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
+import com.jobinlawrance.perpuleassignment.ui.audiodetail.ui.AudioDetailActivity
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.lifecycle.autoDisposable
 import dagger.android.AndroidInjection
@@ -58,6 +60,6 @@ class AudioListActivity : AppCompatActivity(), AudioListContract.View {
     }
 
     fun onAudioItemClickListener(itemId: String) {
-        Log.w("###Perpule", "item id is $itemId")
+        startActivity(AudioDetailActivity.getIntent(this))
     }
 }
