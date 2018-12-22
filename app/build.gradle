@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 androidExtensions {
     experimental = true
@@ -39,14 +38,20 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.0.1'
 
+    implementation 'com.google.dagger:dagger:2.16'
+    implementation 'com.google.dagger:dagger-android:2.16'
+    implementation 'com.google.dagger:dagger-android-support:2.16'
+    kapt 'com.google.dagger:dagger-compiler:2.16'
+    kapt 'com.google.dagger:dagger-android-processor:2.16'
+
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'com.uber.autodispose:autodispose-android:1.0.0-RC2'
-    implementation 'com.uber.autodispose:autodispose-android-ktx:1.0.0-RC2'
-    implementation 'com.uber.autodispose:autodispose-lifecycle:1.0.0-RC2'
-    implementation 'com.uber.autodispose:autodispose-lifecycle-ktx:1.0.0-RC2'
-    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.0.0-RC2'
-    implementation 'com.uber.autodispose:autodispose-android-archcomponents-ktx:1.0.0-RC2'
+    implementation 'com.uber.autodispose:autodispose-android:1.0.0'
+    implementation 'com.uber.autodispose:autodispose-android-ktx:1.0.0'
+    implementation 'com.uber.autodispose:autodispose-lifecycle:1.0.0'
+    implementation 'com.uber.autodispose:autodispose-lifecycle-ktx:1.0.0'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.0.0'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents-ktx:1.0.0'
     implementation 'com.f2prateek.rx.preferences2:rx-preferences:2.0.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 

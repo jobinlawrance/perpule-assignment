@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jobinlawrance.perpuleassignment.R
 import com.jobinlawrance.perpuleassignment.audiolist.entities.AudioData
-import com.jobinlawrance.perpuleassignment.inflate
+import com.jobinlawrance.perpuleassignment.extensions.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_audiolist.*
 

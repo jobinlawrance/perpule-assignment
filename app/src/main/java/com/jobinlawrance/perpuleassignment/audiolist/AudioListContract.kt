@@ -10,6 +10,10 @@ interface AudioListContract {
         fun getAudioList(): Observable<ApiResponse<List<AudioData>>>
     }
 
+    interface Presenter {
+        fun getAudioList(): Observable<AudioListViewState>
+    }
+
     interface View {
         fun renderView(audioListViewState: AudioListViewState)
     }
