@@ -5,6 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_color"
         tools:context=".MainActivity">
 
     <TextView
@@ -12,19 +13,21 @@
             android:layout_height="wrap_content"
             android:text="Welcome, Amigo"
             android:id="@+id/text"
-            style="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/text_chrome"
+            style="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold"
             app:fontFamily="@font/prosansfamily"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/materialButton" tools:ignore="HardcodedText"/>
+            app:layout_constraintBottom_toTopOf="@+id/list_button" tools:ignore="HardcodedText"/>
 
     <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:id="@+id/materialButton"
+            android:id="@+id/list_button"
             android:layout_marginBottom="8dp"
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:text="See them list.."

@@ -2,6 +2,7 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:background="@color/colorAccent"
         android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -10,6 +11,8 @@
     <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_gravity="center"
+            android:indeterminateTint="@color/text_chrome"
+            android:foregroundTint="@color/text_chrome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 </FrameLayout>

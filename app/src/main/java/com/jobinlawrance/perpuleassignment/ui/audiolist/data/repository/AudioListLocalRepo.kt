@@ -13,6 +13,7 @@ class AudioListLocalRepo @Inject constructor(private val audioDao: AudioDao): Au
     override fun getAudioList(): Observable<List<AudioData>> =
         audioDao
             .getAudios()
+            .filter { it.isNotEmpty() }
             .map { list -> list.map { AudioData(it.audioPath,it.desc,it.id) } }
 
     fun updateLocalRepo(audioDataList: List<AudioData>) {
