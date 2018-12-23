@@ -12,4 +12,6 @@ data class Audio(
     val desc: String,
     val audioUrl: String,
     val audioPath: String
-)
+) {
+    fun shouldDownload(): Boolean = audioPath.isBlank() || audioPath.isEmpty()
+}

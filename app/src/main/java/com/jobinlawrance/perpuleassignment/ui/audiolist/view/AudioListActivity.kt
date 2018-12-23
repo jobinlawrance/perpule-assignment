@@ -13,6 +13,7 @@ import com.jobinlawrance.perpuleassignment.R
 import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
 import com.jobinlawrance.perpuleassignment.ui.audiodetail.ui.AudioDetailActivity
+import com.jobinlawrance.perpuleassignment.ui.audiolist.entities.AudioData
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.lifecycle.autoDisposable
 import dagger.android.AndroidInjection
@@ -59,7 +60,7 @@ class AudioListActivity : AppCompatActivity(), AudioListContract.View {
         is AudioListViewState.Error -> TODO()
     }
 
-    fun onAudioItemClickListener(itemId: String) {
-        startActivity(AudioDetailActivity.getIntent(this))
+    private fun onAudioItemClickListener(audioData: AudioData) {
+        startActivity(AudioDetailActivity.getIntent(this, audioData))
     }
 }

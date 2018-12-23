@@ -9,7 +9,7 @@ import com.jobinlawrance.perpuleassignment.extensions.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_audiolist.*
 
-class AudioListAdapter(private val clickListener: (itemId: String) -> Unit) :
+class AudioListAdapter(private val clickListener: (audioData: AudioData) -> Unit) :
     RecyclerView.Adapter<AudioListAdapter.AudioListViewHolder>() {
 
     var audioList: List<AudioData> = emptyList()
@@ -28,12 +28,12 @@ class AudioListAdapter(private val clickListener: (itemId: String) -> Unit) :
         notifyDataSetChanged()
     }
 
-    class AudioListViewHolder(override val containerView: View, private val clickListener: (itemId: String) -> Unit) :
+    class AudioListViewHolder(override val containerView: View, private val clickListener: (audioData: AudioData) -> Unit) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bindView(audioData: AudioData) {
             audio_name.text = audioData.desc
-            containerView.setOnClickListener { clickListener.invoke(audioData.itemId) }
+            containerView.setOnClickListener { clickListener.invoke(audioData) }
         }
     }
 }

@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface AudioListApi {
 
-    @GET("https://api.myjson.com/bins/mxcsl")
+    @GET("https://demo3975508.mockable.io/perpule")
     fun getAudioList(): Observable<ApiResponse<List<AudioData>>>
 }
