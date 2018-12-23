@@ -1,9 +1,9 @@
 package com.jobinlawrance.perpuleassignment.ui.audiolist
 
 import android.annotation.SuppressLint
+import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
 import com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListViewState
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class AudioListPresenter @Inject constructor(val audioListRepo: AudioListContrac
 
         audioListRepo
             .getAudioList()
-            .subscribeOn(Schedulers.io())
+            .applySchedulers()
             .subscribe(
                 {
                     viewStateSubject.onNext(AudioListViewState.Success(it))

@@ -3,6 +3,7 @@ package com.jobinlawrance.perpuleassignment
 import android.app.Activity
 import android.app.Application
 import android.app.Service
+import com.facebook.stetho.Stetho
 import com.jobinlawrance.perpuleassignment.di.ApplicationComponent
 import com.jobinlawrance.perpuleassignment.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
@@ -33,5 +34,6 @@ class MainApplication: Application(), HasActivityInjector, HasServiceInjector {
     override fun onCreate() {
         super.onCreate()
         component.inject(this)
+        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
     }
 }

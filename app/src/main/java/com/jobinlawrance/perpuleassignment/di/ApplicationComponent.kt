@@ -13,6 +13,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [NetworkModule::class,
+        RoomModule::class,
         AndroidInjectionModule::class,
         ActivityBuilder::class,
         ServiceBuilder::class]
