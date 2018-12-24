@@ -14,18 +14,24 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity
+                android:name=".MainActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.audiolist.view.AudioListActivity"
-                  android:theme="@style/AppTheme.Transparent"/>
+        <activity
+                android:name=".ui.audiolist.view.AudioListActivity"
+                android:theme="@style/AppTheme.Transparent"
+                android:screenOrientation="portrait"/>
 
         <service android:name=".ui.audiodetail.ui.AudioService"/>
 
-        <activity android:name=".ui.audiodetail.ui.AudioDetailActivity">
+        <activity
+                android:name=".ui.audiodetail.ui.AudioDetailActivity"
+                android:screenOrientation="portrait">
         </activity>
     </application>
 
