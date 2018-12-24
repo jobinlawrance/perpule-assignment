@@ -7,7 +7,3 @@ import io.reactivex.disposables.Disposable
 fun <T> Observable<T>.applySchedulers(): Observable<T> {
     return this.compose(com.jobinlawrance.perpuleassignment.utils.applySchedulers())
 }
-
-operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
-    add(disposable)
-}

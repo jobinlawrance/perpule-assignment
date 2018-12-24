@@ -1,11 +1,10 @@
 package com.jobinlawrance.perpuleassignment.ui.audiolist.data.repository
 
 import android.annotation.SuppressLint
-import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
-import com.jobinlawrance.perpuleassignment.extensions.plusAssign
 import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
