@@ -1,6 +1,5 @@
 package com.jobinlawrance.perpuleassignment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListActivity
@@ -12,7 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         list_button.setOnClickListener {
-            val intent = Intent(this,AudioListActivity::class.java)
+            val revealX = ((it.x + it.measuredWidth) / 2).toInt()
+            val revealY = ((it.y + it.measuredHeight) / 2).toInt()
+            val intent = AudioListActivity.getIntent(this, 540, 150)
             startActivity(intent)
         }
     }

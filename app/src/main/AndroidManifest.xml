@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.audiolist.view.AudioListActivity"/>
+        <activity android:name=".ui.audiolist.view.AudioListActivity"
+                  android:theme="@style/AppTheme.Transparent"/>
 
         <service android:name=".ui.audiodetail.ui.AudioService"/>
 

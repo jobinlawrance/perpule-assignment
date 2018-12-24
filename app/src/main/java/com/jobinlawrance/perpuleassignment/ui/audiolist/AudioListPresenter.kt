@@ -25,7 +25,7 @@ class AudioListPresenter @Inject constructor(val audioListRepo: AudioListContrac
                     .getAudioList()
                     .applySchedulers()
                     .map {
-                        when (it) {
+                         when (it) {
                             is AudioListPartialChange.AudioList -> {
                                 AudioListViewState.Success(it.list)
                             }
