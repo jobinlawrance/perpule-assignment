@@ -38,6 +38,8 @@ class AudioService : Service(), AudioDetailContract.Service, MediaPlayer.OnPrepa
     private val prefetchSubject = BehaviorSubject.create<String>()
     private val stateSubject = PublishSubject.create<AudioViewState>()
 
+    private val TAG = "###AudioService"
+
     private val mediaPlayer = MediaPlayer().apply {
         setOnPreparedListener(this@AudioService)
         setOnCompletionListener { reset() }
@@ -74,7 +76,7 @@ class AudioService : Service(), AudioDetailContract.Service, MediaPlayer.OnPrepa
                     prepareAsync()
                 }
             }, {
-                Log.e("###Perpule",it.message,it)
+                Log.e("###Perpule", it.message, it)
                 stateSubject.onNext(AudioViewState.LaunchWelcome)
             })
         return stateSubject
@@ -89,23 +91,31 @@ class AudioService : Service(), AudioDetailContract.Service, MediaPlayer.OnPrepa
         return getAudioById(itemId, playNext)
             .doOnNext {
                 if (playNext)
-                    stateSubject.onNext(AudioViewState.ShowNext(AudioData(it.audioUrl,it.desc,it.id)))
-            }
-            .flatMap {
-                if (isPrefetching && prefetchItemId == it.id)
-                    prefetchSubject
-                else if (it.shouldDownload())
-                    download(it.audioUrl, itemId)
-                else
-                    Observable.just(it.audioPath)
+                    stateSubject.onNext(AudioViewState.ShowNext(AudioData(it.audioUrl, it.desc, it.id)))
             }
             .doAfterNext {
-                prefetch(itemId)
+                prefetch(it.id)
+            }
+            .flatMap { audio ->
+                if (isPrefetching && prefetchItemId == audio.id) {
+                    Log.e(TAG, "${audio.desc} is being pre - fetched")
+                    prefetchSubject
+                } else if (audio.shouldDownload()) {
+                    Log.e(TAG, "${audio.desc} going to download")
+                    download(audio.audioUrl, itemId)
+                        .flatMap { path ->
+                            audioDao
+                                .setAudioPath(audio.copy(audioPath = path))
+                                .toObservable()
+                                .map { path }
+                        }
+                } else
+                    Observable.just(audio.audioPath)
             }
             .applySchedulers()
     }
 
-    fun download(url: String, itemId: String): Observable<String> {
+    private fun download(url: String, itemId: String): Observable<String> {
         return audioApi
             .downloadAudio(url)
             .map { responseBody ->
@@ -113,10 +123,9 @@ class AudioService : Service(), AudioDetailContract.Service, MediaPlayer.OnPrepa
                 val file = File(this.filesDir, fileName)
                 val bufferedSink = file.sink().buffer()
                 bufferedSink.write(responseBody.source(), responseBody.contentLength()).close()
-                Log.d("###Perpule", "File path is ${file.absolutePath}")
+                Log.e(TAG, "File path for $itemId is ${file.absolutePath}")
                 file.absolutePath
             }
-            .doOnNext { path -> audioDao.setAudioPath(itemId, path) }
     }
 
     fun getAudioById(id: String, next: Boolean): Observable<Audio> {
@@ -132,10 +141,19 @@ class AudioService : Service(), AudioDetailContract.Service, MediaPlayer.OnPrepa
             .getNextAudio(itemId)
             .filter { it.shouldDownload() }
             .toObservable()
-            .flatMap {
+            .doOnNext {
+                Log.e(TAG, "Prefetch ${it.desc} now")
+            }
+            .flatMap { audio ->
                 isPrefetching = true
                 prefetchItemId = itemId
-                download(it.audioUrl, it.id)
+                download(audio.audioUrl, audio.id)
+                    .flatMap { path ->
+                        audioDao
+                            .setAudioPath(audio.copy(audioPath = path))
+                            .toObservable()
+                            .map { path }
+                    }
             }
             .doOnNext {
                 isPrefetching = false

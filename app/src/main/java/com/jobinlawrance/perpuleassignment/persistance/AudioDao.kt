@@ -19,6 +19,6 @@ interface AudioDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAudio(audios: List<Audio>)
 
-    @Query("UPDATE Audio SET audioPath = :path WHERE audioId = :id")
-    fun setAudioPath(id: String, path: String)
+    @Update
+    fun setAudioPath(audio: Audio): Single<Int>
 }
