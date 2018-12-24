@@ -52,6 +52,17 @@ class AudioService : Service(), AudioDetailContract.Service, MediaPlayer.OnPrepa
         return binder
     }
 
+    override fun onUnbind(intent: Intent?): Boolean {
+        stopSelf()
+        return true
+    }
+
+    override fun onDestroy() {
+        mediaPlayer.reset()
+        mediaPlayer.release()
+        super.onDestroy()
+    }
+
     @SuppressLint("CheckResult")
     override fun playAudio(itemId: String, playNext: Boolean): Observable<AudioViewState> {
         mediaPlayer.reset()

@@ -1,11 +1,13 @@
 package com.jobinlawrance.perpuleassignment.ui.audiolist.data.repository
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
+import com.jobinlawrance.perpuleassignment.extensions.plusAssign
 import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
-import com.jobinlawrance.perpuleassignment.ui.audiolist.entities.AudioData
 import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class AudioListRepo @Inject constructor(
@@ -13,20 +15,36 @@ class AudioListRepo @Inject constructor(
     private val audioListLocalRepo: AudioListLocalRepo
 ) : AudioListContract.Repository {
 
+    private val audioListSubject =
+        PublishSubject.create<AudioListPartialChange>()
+
+    val compositeDisposable = CompositeDisposable()
+
     @SuppressLint("CheckResult")
-    override fun getAudioList(): Observable<List<AudioData>> {
+    override fun getAudioList(): Observable<AudioListPartialChange> {
         //network call
-        audioListNetworkRepo
-            .getAudioList()
-            .doOnNext(audioListLocalRepo::updateLocalRepo)
-            .applySchedulers()
-            .subscribe({}) {
-                Log.e("###Perpule",it.message,it)
-            }
+        compositeDisposable +=
+                audioListNetworkRepo
+                    .getAudioList()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        if (it is AudioListPartialChange.AudioList)
+                            audioListLocalRepo.updateLocalRepo(it.list)
+                    }) {
+                        audioListSubject.onNext(AudioListPartialChange.NetworkError)
+                    }
 
         //local data observable
-        return audioListLocalRepo
+        compositeDisposable += audioListLocalRepo
             .getAudioList()
+            .subscribe(audioListSubject::onNext) {
+                audioListSubject.onNext(AudioListPartialChange.DatabaseError)
+            }
+
+        return audioListSubject
+            .doOnDispose {
+                compositeDisposable.dispose()
+            }
     }
 
 }

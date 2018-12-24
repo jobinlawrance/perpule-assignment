@@ -2,6 +2,7 @@ package com.jobinlawrance.perpuleassignment.ui.audiolist
 
 import android.annotation.SuppressLint
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
+import com.jobinlawrance.perpuleassignment.ui.audiolist.data.repository.AudioListPartialChange
 import com.jobinlawrance.perpuleassignment.ui.audiolist.view.AudioListViewState
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -18,13 +19,24 @@ class AudioListPresenter @Inject constructor(val audioListRepo: AudioListContrac
         audioListRepo
             .getAudioList()
             .applySchedulers()
+            .map {
+                when(it) {
+                    is AudioListPartialChange.AudioList -> {
+                        AudioListViewState.Success(it.list)
+                    }
+                    AudioListPartialChange.NetworkError -> {
+                        AudioListViewState.NetworkError("Network error, Try Again.")
+                    }
+                    AudioListPartialChange.DatabaseError -> {
+                        AudioListViewState.DatabaseError("Ooops, there's some error")
+                    }
+                }
+            }
             .subscribe(
                 {
-                    viewStateSubject.onNext(AudioListViewState.Success(it))
-                    viewStateSubject.onComplete()
+                    viewStateSubject.onNext(it)
                 },
                 {
-                    viewStateSubject.onNext(AudioListViewState.Error("SomeError occurred"))
                     viewStateSubject.onComplete()
                 }
             )

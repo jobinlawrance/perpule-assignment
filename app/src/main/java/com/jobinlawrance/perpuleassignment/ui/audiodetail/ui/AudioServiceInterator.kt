@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class AudioServiceInterator @Inject constructor(private val context: Context) {
+
+    var isBound = false
 
     fun getService(): Observable<AudioService> {
 
@@ -34,6 +37,7 @@ class AudioServiceInterator @Inject constructor(private val context: Context) {
                 val intent = Intent(context.applicationContext, AudioService::class.java)
                 context.startService(intent)
                 context.bindService(intent, serviceConnection, 0)
+                Log.d("###Perpule","Binding")
             }
 
             override fun unBind(serviceConnection: ServiceConnection) {
@@ -43,9 +47,10 @@ class AudioServiceInterator @Inject constructor(private val context: Context) {
         }
 
         serviceHandler.bind(serviceConnection)
+        isBound = true
 
         return serviceSubject.doOnDispose {
-            serviceHandler.unBind(serviceConnection)
+            if (isBound) serviceHandler.unBind(serviceConnection)
         }
     }
 

@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.jobinlawrance.perpuleassignment.R
 import com.jobinlawrance.perpuleassignment.ui.audiolist.AudioListContract
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
@@ -57,7 +59,16 @@ class AudioListActivity : AppCompatActivity(), AudioListContract.View {
             progress_bar.isGone = true
             audioListAdapter.addAudioList(audioListViewState.audioDataList)
         }
-        is AudioListViewState.Error -> TODO()
+
+        is AudioListViewState.NetworkError -> {
+            val toast = Toast.makeText(this, audioListViewState.message, Toast.LENGTH_LONG)
+            toast.show()
+        }
+        is AudioListViewState.DatabaseError -> {
+            progress_bar.isGone = true
+            error_text.isVisible = true
+            error_text.text = audioListViewState.message
+        }
     }
 
     private fun onAudioItemClickListener(audioData: AudioData) {

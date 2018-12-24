@@ -1,6 +1,5 @@
 package com.jobinlawrance.perpuleassignment.ui.audiodetail
 
-import android.annotation.SuppressLint
 import com.jobinlawrance.perpuleassignment.ui.audiodetail.ui.AudioViewState
 import io.reactivex.Observable
 
@@ -12,6 +11,7 @@ interface AudioDetailContract {
 
     interface Presenter {
         fun playAudio(itemId: String, playNext: Boolean): Observable<AudioViewState>
+        fun stopAudio()
     }
 
     interface View {

@@ -11,6 +11,8 @@ import com.jobinlawrance.perpuleassignment.R
 import com.jobinlawrance.perpuleassignment.extensions.applySchedulers
 import com.jobinlawrance.perpuleassignment.ui.audiodetail.AudioDetailContract
 import com.jobinlawrance.perpuleassignment.ui.audiolist.entities.AudioData
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.lifecycle.autoDisposable
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -22,7 +24,9 @@ class AudioDetailActivity : AppCompatActivity(), AudioDetailFragment.OnFragmentI
     @Inject
     lateinit var presenter: AudioDetailContract.Presenter
 
-    var fragment: AudioDetailFragment? = null
+    private var fragment: AudioDetailFragment? = null
+
+    private val scopeProvider by lazy { AndroidLifecycleScopeProvider.from(this) }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +38,10 @@ class AudioDetailActivity : AppCompatActivity(), AudioDetailFragment.OnFragmentI
         presenter
             .playAudio(audioData.itemId, false)
             .applySchedulers()
+            .autoDisposable(scopeProvider)
             .subscribe(this::renderView) {
                 Log.e("###Perpule",it.message,it)
             }
-
     }
 
     override fun renderView(audioViewState: AudioViewState) {
@@ -71,7 +75,14 @@ class AudioDetailActivity : AppCompatActivity(), AudioDetailFragment.OnFragmentI
     override fun onClickNext() {
         presenter
             .playAudio(audioData.itemId, true)
-            .subscribe()
+            .subscribe({}){
+                Log.e("###Perpule",it.message,it)
+            }
+    }
+
+    override fun onDestroy() {
+        presenter.stopAudio()
+        super.onDestroy()
     }
 
     companion object {
